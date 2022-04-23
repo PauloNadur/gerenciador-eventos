@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">Nenhum evento cadastrado.</div>
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+	<div th:if="${not #lists.isEmpty(lista)}">
+		<div class="card mb-3">
+			<div class="card-header">
+				<p class="text-secondary"><b>Lista de Eventos Cadastrados</b></p>
+			</div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nome</th>
+						<th>Capacidade</th>
+						<th>Data</th>
+						<th>Preço</th>
+						<th>Local do Show</th>
+						<th>Gênero Musical</th>
+						<th>Opções</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="evento : ${lista}">
+						<td th:text="${evento.id}"></td>
+						<td th:text="${evento.nome}"></td>
+						<td th:text="${evento.capacidade}"></td>
+						<td th:text="${#dates.format(evento.data, 'dd/MM/yyyy')}"></td>
+						<td th:text="'R$ '+${#numbers.formatDecimal(evento.preco, 0, 'POINT', 2, 'COMMA')}"></td>
+						<td th:text="${evento.local.nome}"></td>
+						<td th:text="${evento.generoMusical}"></td>
+						<td><a class="btn btn-primary btn-sm" th:href="@{/evento/editar(id=${evento.id})}">Editar</a>
+							<a class="btn btn-secondary btn-sm" th:href="@{/evento/excluir(id=${evento.id})}"
+							   onclick="return confirm('Você realmente deseja excluir esse evento?')">Excluir</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</html>

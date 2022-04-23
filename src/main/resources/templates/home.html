@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+
+	<p>Olá, bem-vindo aos melhores rooftops do mundo!</p>
+
+	<div class="alert alert-success" th:if="${mensagemSucesso != null}" th:text="${mensagemSucesso}"></div>
+	<div class="alert alert-danger" th:if="${mensagemErro != null}" th:text="${mensagemErro}"></div>
+
+</div>		
+</html>
